@@ -1,2 +1,2 @@
 # projet_MH
-Dépôt public pour le prochain de métaheuristiques
+Dépôt public pour le projet de métaheuristiques
