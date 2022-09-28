@@ -1,11 +1,6 @@
 from typing import Tuple, List
 
-from utils import ROOT_DIR
-
-BINPACKING_DIR = ROOT_DIR / "binpacking"
-TEST_FILES_DIR = BINPACKING_DIR / "test_files"
-BASE_TEST_FILES_DIR = TEST_FILES_DIR / "base_files"
-SPLIT_TEST_FILES_DIR = TEST_FILES_DIR / "split_files"
+from binpacking.constants import BASE_TEST_FILES_DIR, SPLIT_TEST_FILES_DIR
 
 
 def split_test_file(source_file_path: str) -> None:
