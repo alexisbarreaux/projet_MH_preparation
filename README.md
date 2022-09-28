@@ -3,7 +3,7 @@ Dépôt public pour le projet de métaheuristiques
 
 ## Contributeurs
  - Alexis Barreaux
- - Sulian Lebezec
+ - Sulian Le Bozec-Chiffoleau
 
 ## Using
 @article{JMLR:v21:20-412,
