@@ -1,3 +1,3 @@
 from pathlib import Path
 
-ROOT_PATH = Path.cwd()
+ROOT_DIR = Path.cwd()
