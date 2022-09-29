@@ -1,2 +1,2 @@
-from .file_splitting_utils import *
-from .validity_checking import *
+from .file_handling_utils import *
+from .validity_checking_utils import *
