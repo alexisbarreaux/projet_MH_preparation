@@ -38,7 +38,7 @@ def read_single_problem_from_file(
     """
     identifier = source_file.readline().strip()
     problems_parameters = source_file.readline().strip().split(" ")
-    [bin_capacity, number_of_items, optimal_bin_numbers] = list(
+    [bin_capacity, number_of_items, optimal_bin_number] = list(
         map(int, problems_parameters)
     )
     # Get the items
@@ -48,7 +48,7 @@ def read_single_problem_from_file(
         identifier,
         bin_capacity,
         number_of_items,
-        optimal_bin_numbers,
+        optimal_bin_number,
         items,
     )
 
@@ -57,7 +57,7 @@ def write_test_file_from_parameters(
     identifier: str,
     bin_capacity: int,
     number_of_items: int,
-    optimal_bin_numbers: int,
+    optimal_bin_number: int,
     items: List[int],
     destination_path: str = SPLIT_TEST_FILES_DIR,
 ) -> None:
@@ -67,7 +67,7 @@ def write_test_file_from_parameters(
     with open(destination_path / (identifier + ".txt"), "w") as destination_file:
         destination_file.write(identifier)
         destination_file.write(
-            "\n" + f"{bin_capacity} {number_of_items} {optimal_bin_numbers}"
+            "\n" + f"{bin_capacity} {number_of_items} {optimal_bin_number}"
         )
         for i in range(number_of_items):
             destination_file.write("\n" + str(items[i]))

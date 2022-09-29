@@ -1,21 +1,13 @@
 from typing import Tuple
 
-from binpacking.utils import read_single_problem_from_path
 
-
-def naive_base_order(source_file_path: str) -> Tuple[int, list]:
+def naive_base_order(
+    bin_capacity: int, number_of_items: int, items_sizes: int
+) -> Tuple[int, list, list]:
     """
     Manage items in the base order they are given,
     for each try to put it in a bin, if none fit add one.
     """
-    (
-        _,
-        bin_capacity,
-        number_of_items,
-        _,
-        items_sizes,
-    ) = read_single_problem_from_path(source_file_path)
-
     items_bin_position = [-1 for _ in range(number_of_items)]
     bins_left_capacity = []
     max_bin = -1
@@ -43,4 +35,4 @@ def naive_base_order(source_file_path: str) -> Tuple[int, list]:
             items_bin_position[item_position] = max_bin
 
     number_of_bins = len(bins_left_capacity)
-    return number_of_bins, items_bin_position, bins_left_capacity
+    return number_of_bins, items_sizes, items_bin_position
