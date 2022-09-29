@@ -3,10 +3,13 @@ from typing import Tuple
 
 def naive_base_order(
     bin_capacity: int, number_of_items: int, items_sizes: int
-) -> Tuple[int, list, list]:
+) -> Tuple[int, list]:
     """
     Manage items in the base order they are given,
     for each try to put it in a bin, if none fit add one.
+
+    Complexity is O(n²), for each item i we have at most to check at most i - 1 bins
+    used before.
     """
     items_bin_position = [-1 for _ in range(number_of_items)]
     bins_left_capacity = []
@@ -35,4 +38,4 @@ def naive_base_order(
             items_bin_position[item_position] = max_bin
 
     number_of_bins = len(bins_left_capacity)
-    return number_of_bins, items_sizes, items_bin_position
+    return number_of_bins, items_bin_position
