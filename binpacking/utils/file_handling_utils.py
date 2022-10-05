@@ -23,6 +23,16 @@ def split_test_file(source_file_path: str) -> None:
     return
 
 
+def split_test_folder(source_directory: str) -> None:
+    """
+    Takes a folder containing multiple files with binpacking
+    problems and splits it into separate files.
+    """
+    for test_file in os.listdir(source_directory):
+        split_test_file(source_directory / test_file)
+    return
+
+
 def read_single_problem_from_path(
     source_file_path: str,
 ) -> Tuple[str, int, int, int, List[int]]:
@@ -109,4 +119,4 @@ def write_solution_to_file(
 
 
 if __name__ == "__main__":
-    split_test_file(BASE_TEST_FILES_DIR / "binpack1.txt")
+    split_test_folder(BASE_TEST_FILES_DIR)
