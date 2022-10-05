@@ -35,33 +35,40 @@ class HeuristicRunner:
     verbose: bool = False
     write_solution: bool = False
 
-    def __init__(
-        self,
-        method: Callable,
-        test_directory: Path = None,
-        test_file_path: Path = None,
-        show_solution: bool = False,
-        show_runtime: bool = False,
-        write_solution: bool = False,
-    ) -> None:
+    def __init__(self, method: Callable, **kwargs) -> None:
         self.method = method
-        self.test_directory = test_directory
-        self.test_file_path = test_file_path
-        self.show_solution = show_solution
-        self.show_runtime = show_runtime
-        self.write_solution = write_solution
+        for argument in kwargs:
+            setattr(self, argument, kwargs[argument])
         return
 
     def build_base_display_message(self) -> str:
-        return f"Method {self.method.__name__} ran on {self.identifier}"
+        if self.verbose:
+            return f"Method {self.method.__name__} ran on {self.identifier}"
+        else:
+            return f"{self.method.__name__} {self.identifier}"
+
+    def build_runtime_message(self) -> str:
+        if self.show_runtime:
+            if self.verbose:
+                return f" in {self.runtime}s"
+            else:
+                return f" {self.runtime}s"
+        else:
+            return
+
+    def build_solution_message(self) -> str:
+        if self.show_solution:
+            if self.verbose:
+                return f" found_result/known_optimal {self.number_of_bins}/{self.optimal_bin_number}"
+            else:
+                return f"{self.number_of_bins}/{self.optimal_bin_number}"
+        else:
+            return ""
 
     def build_display_message(self) -> str:
         print_message = self.build_base_display_message()
-
-        if self.show_runtime:
-            print_message += f" in {self.runtime}s"
-        if self.show_solution:
-            print_message += f" opt/res {self.optimal_bin_number}/{self.number_of_bins}"
+        print_message += self.build_runtime_message()
+        print_message += self.build_solution_message()
         return print_message
 
     def load_single_file(self) -> None:

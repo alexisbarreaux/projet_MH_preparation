@@ -8,5 +8,6 @@ if __name__ == "__main__":
         test_directory=SPLIT_TEST_FILES_DIR,
         show_solution=True,
         show_runtime=True,
+        verbose=True,
     )
     runner.run_method_on_whole_directory()
