@@ -1,5 +1,9 @@
 from binpacking.constants import SPLIT_TEST_FILES_DIR
-from binpacking.heuristics import naive_base_order, HeuristicRunner
+from binpacking.heuristics import (
+    naive_base_order,
+    naive_with_ordered_items,
+    HeuristicRunner,
+)
 from binpacking.utils import (
     display_optimum_versus_found,
     display_excess_optimum_versus_found,
@@ -8,28 +12,50 @@ from binpacking.utils import (
 
 
 if __name__ == "__main__":
+
+    # First run with naive
     runner = HeuristicRunner(
         method=naive_base_order,
         test_directory=SPLIT_TEST_FILES_DIR,
-        show_solution=True,
-        show_runtime=True,
-        verbose=True,
+        # show_solution=True,
+        # show_runtime=True,
+        # verbose=True,
     )
     (
-        found_solutions,
+        unordered_found_solutions,
         known_optimums,
-        runtimes,
+        unordered_runtimes,
+    ) = runner.run_method_on_whole_directory_saving_results()
+
+    # Then run with ordering
+    runner.method = naive_with_ordered_items
+    (
+        ordered_found_solutions,
+        _,
+        ordered_runtimes,
     ) = runner.run_method_on_whole_directory_saving_results()
 
     """
+    display_runtimes(
+        runtimes={
+            "naive_base_order": unordered_runtimes,
+            "naive_with_ordered_items": ordered_runtimes,
+        }
+    )
+    
     display_optimum_versus_found(
-        found_solutions=found_solutions, known_optimums=known_optimums
+        optimums=known_optimums,
+        found_solutions={
+            "naive_base_order": unordered_found_solutions,
+            "naive_with_ordered_items": ordered_found_solutions,
+        },
     )
     """
-
     display_excess_optimum_versus_found(
-        found_solutions=found_solutions,
-        known_optimums=known_optimums,
+        optimums=known_optimums,
+        found_solutions={
+            "naive_base_order": unordered_found_solutions,
+            "naive_with_ordered_items": ordered_found_solutions,
+        },
         display_type="percentage",
     )
-    display_runtimes(runtimes=runtimes)
