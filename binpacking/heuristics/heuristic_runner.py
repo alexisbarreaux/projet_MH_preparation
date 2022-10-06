@@ -1,6 +1,6 @@
 import os
 from pathlib import Path
-from typing import Callable
+from typing import Callable, Tuple
 from time import time
 
 from binpacking.utils import (
@@ -42,12 +42,14 @@ class HeuristicRunner:
         return
 
     def build_base_display_message(self) -> str:
+        """First part of displayed message"""
         if self.verbose:
             return f"Method {self.method.__name__} ran on {self.identifier}"
         else:
             return f"{self.method.__name__} {self.identifier}"
 
     def build_runtime_message(self) -> str:
+        """Runtime part of displayed message"""
         if self.show_runtime:
             if self.verbose:
                 return f" in {self.runtime}s"
@@ -57,6 +59,7 @@ class HeuristicRunner:
             return
 
     def build_solution_message(self) -> str:
+        """Solution part of the display message"""
         if self.show_solution:
             if self.verbose:
                 return f" found_result/known_optimal {self.number_of_bins}/{self.optimal_bin_number}"
@@ -132,6 +135,19 @@ class HeuristicRunner:
         return self.number_of_bins, self.items_bin_position
 
     def run_method_on_whole_directory(self) -> None:
+        """Run method on all test files in a directory"""
         for test_file in os.listdir(self.test_directory):
             self.test_file_path = self.test_directory / test_file
             self.run_method_on_single_file()
+
+    def run_method_on_whole_directory_saving_results(self) -> Tuple[list, list, list]:
+        """Run method on all test files in a directory and return key parameters"""
+        found_solutions, known_optimums, runtimes = [], [], []
+        for test_file in os.listdir(self.test_directory):
+            self.test_file_path = self.test_directory / test_file
+            self.run_method_on_single_file()
+            found_solutions.append(self.number_of_bins)
+            known_optimums.append(self.optimal_bin_number)
+            runtimes.append(self.runtime)
+
+        return found_solutions, known_optimums, runtimes
