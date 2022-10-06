@@ -57,7 +57,9 @@ def naive_with_ordered_items(
     bins_left_capacity = []
     max_bin = -1
 
-    ordering = np.argsort(np.array(items_sizes))
+    # We negate the array to have the argsort of the base array in
+    # descending order
+    ordering = np.argsort(-1 * np.array(items_sizes))
 
     for item_position in ordering:
         current_size = items_sizes[item_position]

@@ -42,7 +42,7 @@ if __name__ == "__main__":
             "naive_with_ordered_items": ordered_runtimes,
         }
     )
-    
+
     display_optimum_versus_found(
         optimums=known_optimums,
         found_solutions={
