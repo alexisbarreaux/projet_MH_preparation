@@ -130,3 +130,4 @@ dmypy.json
 
 # Personnal ignored files:
 Scripts/
+pyvenv.cfg
