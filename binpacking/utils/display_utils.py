@@ -25,3 +25,11 @@ def display_excess_optimum_versus_found(
     plt.plot(abscisses, excess, "r+")
     plt.show()
     return
+
+
+def display_runtimes(runtimes: list) -> None:
+    abscisses = np.arange(len(runtimes))
+    plt.clf()
+    plt.plot(abscisses, runtimes, "r+")
+    plt.show()
+    return

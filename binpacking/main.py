@@ -3,6 +3,7 @@ from binpacking.heuristics import naive_base_order, HeuristicRunner
 from binpacking.utils import (
     display_optimum_versus_found,
     display_excess_optimum_versus_found,
+    display_runtimes,
 )
 
 
@@ -31,3 +32,4 @@ if __name__ == "__main__":
         known_optimums=known_optimums,
         display_type="percentage",
     )
+    display_runtimes(runtimes=runtimes)
